@@ -68,12 +68,12 @@ long Experiment::singleExperimentResult() {
 }
 #pragma omp critical
 {
-	int seed = (unsigned)(random() * (omp_get_thread_num()+2));
+	int seed = (unsigned)(random() * (omp_get_num_threads()+2));
 	srand48_r(seed, &drand_Buffor);
 }
 
 #pragma omp for
-	for (int i = 0; i < drawsNumber;) {
+	for (int i = 0; i < drawsNumber; i++) {
 #pragma omp critical
 		double result;
 		int drand48_r(&drand_Buffor, &result);
