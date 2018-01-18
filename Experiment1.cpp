@@ -19,7 +19,6 @@
 
 #define DEBUG_ON_
 
-using namespace concurrency;
 using namespace std;
 
 Experiment::Experiment(int balls, int drawsNumber) {
