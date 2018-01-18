@@ -27,8 +27,6 @@ Experiment::Experiment(int balls, int drawsNumber) {
 	hmax = 0; // wyznaczamy maksymalna sume
 	hmin = 0; // i najmniejsza sume
 
-// #pragma omp parallel for shared(balls, drawsNumber) private(i)\
-// 				reduction(+ : hmax, hmin)
 	for (int i = 0; i < drawsNumber; i++) {
 		hmax += balls - i;
 		hmin += i + 1; // 1 + 2 + 3 + ... liczba losowan
@@ -36,19 +34,13 @@ Experiment::Experiment(int balls, int drawsNumber) {
 
 	cout << "Histogram min: " << hmin << " max: " << hmax << endl;
 
-#pragma omp single
-{
 	histogram = new long[hmax + 1];
   cout << "1 "  << endl;
-}
 // each thread own one used array
-// #pragma omp critical
-// {
-	used = new bool[balls];
+	// used = new bool[balls];
+	bool usedPerThread = new bool[balls];
   cout << "2 "  << endl;
-// }
 
-// #pragma omp parallel for shared(hmax, histogram) private(i)
 	for (long i = 0; i < hmax + 1; i++)
 		histogram[i] = 0;
     cout << "3 " << endl;
@@ -70,26 +62,23 @@ long Experiment::singleExperimentResult() {
 	clearUsed();
 
   cout << "6 "  << endl;
-// #pragma omp single
-// {
 	struct drand48_data *drand_Buffor;
-  cout << "7 "  << endl;
-// }
-// #pragma omp parallel
-// {
-#pragma omp critical
-{
-	int seed = (unsigned)(random() * (omp_get_thread_num()+2));
-  cout << "8 "  << endl;
-	srand48_r(seed, drand_Buffor);
-  cout << "9 "  << endl;
-}
-// }
+#pragma omp threadprivate(drand_Buffor);
 
-#pragma omp for
+  cout << "7 "  << endl;
+	struct plantSeed{
+		plantSeed(){
+			int seed = (unsigned)(random() * (omp_get_thread_num()+2));
+		  cout << "8 "  << endl;
+			srand48_r(seed, drand_Buffor);
+		  cout << "9 "  << endl;
+		}
+	}
+
+	plantSeed ps();
+#pragma omp for private(ps)
 	for (int i = 0; i < drawsNumber; i++) {
     cout << "11 "  << endl;
-// #pragma omp critical
 		double result;
 		drand48_r(drand_Buffor, &result);
     cout << "12 "  << endl;
@@ -120,8 +109,8 @@ long Experiment::singleExperimentResult() {
 
 Result * Experiment::calc(long experiments) {
 
-#pragma omp parallel
-{
+// #pragma omp parallel
+// {
  // for shared(experiments, histogram) private(l)\
 				// reduction(+ : histogram)
 #pragma omp parallel for
@@ -131,7 +120,7 @@ Result * Experiment::calc(long experiments) {
 #pragma omp atomic
 		histogram[i]++;
 	}
-}
+// }
 
 	long maxID = 0;
 	long minID = 0;
@@ -140,8 +129,6 @@ Result * Experiment::calc(long experiments) {
 	double sum = 0.0;
 	long values = 0;
 
-#pragma omp parallel
-{
 // for shared(maxN, maxID, hmin, hmax, histogram, sum) private(idx)\
 				// reduction(+ : sum, values)
 #pragma omp parallel for
@@ -150,13 +137,12 @@ Result * Experiment::calc(long experiments) {
 			maxN = histogram[idx];
 			maxID = idx;
 		}
-
 #pragma omp atomic
 		sum += idx * histogram[idx];
 #pragma omp atomic
 		values += histogram[idx];
 	}
-}
+
 
 // indeks to wartosc, histogram -> liczba wystapien
 	return new Result(maxID, maxN, sum / values, values);
