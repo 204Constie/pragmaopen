@@ -62,10 +62,10 @@ long Experiment::singleExperimentResult() {
 
 	clearUsed();
 
-#pragma omp single
-{
+// #pragma omp single
+// {
 	struct drand48_data *drand_Buffor;
-}
+// }
 #pragma omp critical
 {
 	int seed = (unsigned)(random() * (omp_get_num_threads()+2));
@@ -74,7 +74,7 @@ long Experiment::singleExperimentResult() {
 
 #pragma omp for
 	for (int i = 0; i < drawsNumber; i++) {
-#pragma omp critical
+// #pragma omp critical
 		double result;
 		int drand48_r(&drand_Buffor, &result);
 		ball = 1 + (int) (((double) balls * result) / ( RAND_MAX + 1.0)); // rand losuje od 0 do RAND_MAX wlacznie
