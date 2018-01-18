@@ -77,7 +77,7 @@ long Experiment::singleExperimentResult() {
 			srand48_r(seed, &drand_Buffor);
 		}
 
-	}
+	};
 	plantSeed ps(true);
 
 
