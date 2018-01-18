@@ -35,7 +35,7 @@ Experiment::Experiment(int balls, int drawsNumber) {
 	}
 
 	cout << "Histogram min: " << hmin << " max: " << hmax << endl;
-#pragma omp once
+#pragma omp single
 {
 	histogram = new long[hmax + 1];
 }
