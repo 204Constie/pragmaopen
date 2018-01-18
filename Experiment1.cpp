@@ -73,7 +73,7 @@ long Experiment::singleExperimentResult() {
   cout << "7 "  << endl;
 	int seed = (unsigned)(random() * (omp_get_thread_num()+2));
 	srand48_r(seed, &drand_Buffor);
-#pragma omp for
+#pragma omp for private (drand_Buffor)
 	for (int i = 0; i < drawsNumber; i++) {
     cout << "11 "  << endl;
 		double result = 0;
