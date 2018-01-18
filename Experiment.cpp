@@ -11,6 +11,7 @@
 
 #include<stdlib.h>
 #include<iostream>
+#include <omp.h>
 
 #include "Experiment.h"
 #include "Distribution.h"
@@ -66,14 +67,14 @@ long Experiment::singleExperimentResult() {
 // {
 	struct drand48_data *drand_Buffor;
 // }
-#pragma omp parallel
-{
-#pragma omp critical
-{
+// #pragma omp parallel
+// {
+// #pragma omp critical
+// {
 	int seed = (unsigned)(random() * (omp_get_thread_num()+2));
 	srand48_r(seed, drand_Buffor);
-}
-}
+// }
+// }
 
 #pragma omp for
 	for (int i = 0; i < drawsNumber; i++) {
