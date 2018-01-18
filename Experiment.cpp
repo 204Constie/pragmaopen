@@ -26,8 +26,8 @@ Experiment::Experiment(int balls, int drawsNumber) {
 	hmax = 0; // wyznaczamy maksymalna sume
 	hmin = 0; // i najmniejsza sume
 
-#pragma omp parallel for shared(balls, drawsNumber) private(i)\
-				reduction(+ : hmax, hmin)
+// #pragma omp parallel for shared(balls, drawsNumber) private(i)\
+// 				reduction(+ : hmax, hmin)
 	for (int i = 0; i < drawsNumber; i++) {
 		hmax += balls - i;
 		hmin += i + 1; // 1 + 2 + 3 + ... liczba losowan
@@ -44,7 +44,7 @@ Experiment::Experiment(int balls, int drawsNumber) {
 	used = new bool[balls];
 }
 
-#pragma omp parallel for shared(hmax, histogram) private(i)
+// #pragma omp parallel for shared(hmax, histogram) private(i)
 	for (long i = 0; i < hmax + 1; i++)
 		histogram[i] = 0;
 }
