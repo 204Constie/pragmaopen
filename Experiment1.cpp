@@ -39,34 +39,37 @@ Experiment::Experiment(int balls, int drawsNumber) {
 #pragma omp single
 {
 	histogram = new long[hmax + 1];
-  cout << "1 " << hmax << endl;
+  cout << "1 "  << endl;
 }
 // each thread own one used array
 // #pragma omp critical
 // {
 	used = new bool[balls];
-  cout << "2 " << hmax << endl;
+  cout << "2 "  << endl;
 // }
 
 // #pragma omp parallel for shared(hmax, histogram) private(i)
 	for (long i = 0; i < hmax + 1; i++)
 		histogram[i] = 0;
-    cout << "3 " << hmax << endl;
+    cout << "3 " << endl;
 }
 
 void Experiment::clearUsed() {
 
 	for (int i = 0; i < balls; i++)
 		used[i] = false;
+    cout << "4 "  << endl;
 }
 
 long Experiment::singleExperimentResult() {
 	long sum = 0;
 	int ball;
 	double p;
+  cout << "5 "  << endl;
 
 	clearUsed();
 
+  cout << "6 "  << endl;
 // #pragma omp single
 // {
 	struct drand48_data *drand_Buffor;
