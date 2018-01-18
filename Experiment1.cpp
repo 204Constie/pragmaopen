@@ -35,19 +35,23 @@ Experiment::Experiment(int balls, int drawsNumber) {
 	}
 
 	cout << "Histogram min: " << hmin << " max: " << hmax << endl;
+
 #pragma omp single
 {
 	histogram = new long[hmax + 1];
+  cout << "1 " << hmax << endl;
 }
 // each thread own one used array
 // #pragma omp critical
 // {
 	used = new bool[balls];
+  cout << "2 " << hmax << endl;
 // }
 
 // #pragma omp parallel for shared(hmax, histogram) private(i)
 	for (long i = 0; i < hmax + 1; i++)
 		histogram[i] = 0;
+    cout << "3 " << hmax << endl;
 }
 
 void Experiment::clearUsed() {
