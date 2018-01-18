@@ -21,6 +21,9 @@
 
 using namespace std;
 
+struct drand48_data drand_Buffor;
+#pragma omp threadprivate(drand_Buffor)
+
 Experiment::Experiment(int balls, int drawsNumber) {
 	this->balls = balls;
 	this->drawsNumber = drawsNumber;
@@ -65,8 +68,7 @@ long Experiment::singleExperimentResult() {
 	clearUsed();
 
   cout << "6 "  << endl;
-	struct drand48_data drand_Buffor;
-#pragma omp threadprivate(drand_Buffor)
+
 
   cout << "7 "  << endl;
 	int seed = (unsigned)(random() * (omp_get_thread_num()+2));
