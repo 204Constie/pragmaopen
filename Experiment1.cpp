@@ -85,15 +85,19 @@ long Experiment::singleExperimentResult() {
 
 #pragma omp for
 	for (int i = 0; i < drawsNumber; i++) {
+    cout << "11 "  << endl;
 // #pragma omp critical
 		double result;
 		drand48_r(drand_Buffor, &result);
+    cout << "12 "  << endl;
 		ball = 1 + (int) (((double) balls * result) / ( RAND_MAX + 1.0)); // rand losuje od 0 do RAND_MAX wlacznie
-
+    cout << "13 "  << endl;
 		if (used[ball - 1])
 			continue;
 
+    cout << "21 "  << endl;
 		p = Distribution::getProbability(i + 1, ball); // pobieramy prawdopodobienstwo wylosowania tej kuli
+    cout << "22 "  << endl;
 
 		if ((result / ( RAND_MAX + 1.0)) < p) // akceptacja wyboru kuli z zadanym prawdopodobienstwem
 				{
