@@ -38,7 +38,8 @@ Experiment::Experiment(int balls, int drawsNumber) {
   cout << "1 "  << endl;
 // each thread own one used array
 	// used = new bool[balls];
-	bool *usedPerThread = usedPerThread = new bool[balls];
+	usedPerThread = new bool[balls];
+	bool *usedPerThread = usedPerThread;
   cout << "2 "  << endl;
 
 	for (long i = 0; i < hmax + 1; i++)
