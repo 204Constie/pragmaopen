@@ -12,6 +12,7 @@
 #include<stdlib.h>
 #include<iostream>
 #include <omp.h>
+#include <stdio.h>
 
 #include "Experiment.h"
 #include "Distribution.h"
