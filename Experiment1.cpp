@@ -49,7 +49,8 @@ Experiment::Experiment(int balls, int drawsNumber) {
 void Experiment::clearUsed() {
 
 	for (int i = 0; i < balls; i++)
-		used[i] = false;
+		usedPerThread[i] = false;
+		// used[i] = false;
     cout << "4 "  << endl;
 }
 
