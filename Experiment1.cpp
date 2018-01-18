@@ -18,8 +18,8 @@
 
 #define DEBUG_ON_
 
+using namespace concurrency;
 using namespace std;
-using namespace concurrency; 
 
 Experiment::Experiment(int balls, int drawsNumber) {
 	this->balls = balls;
