@@ -113,9 +113,7 @@ Result * Experiment::calc(long experiments) {
 		// i = singleExperimentResult() i pragma omp atomic zeby zabezpieczyc histogram
 		int i = singleExperimentResult();
 #pragma omp atomic
-{
 		histogram[i]++;
-}
 	}
 
 	long maxID = 0;
@@ -135,10 +133,9 @@ Result * Experiment::calc(long experiments) {
 		}
 
 #pragma omp atomic
-{
 		sum += idx * histogram[idx];
+#pragma omp atomic
 		values += histogram[idx];
-}
 	}
 
 // indeks to wartosc, histogram -> liczba wystapien
