@@ -65,27 +65,17 @@ long Experiment::singleExperimentResult() {
 
   cout << "6 "  << endl;
 	struct drand48_data drand_Buffor;
-	static drand48_data *myBuffor;
-#pragma omp threadprivate(myBuffor)
+#pragma omp threadprivate(drand_Buffor)
 
   cout << "7 "  << endl;
-	struct plantSeed{
-		plantSeed(int seed, drand48_data &buff){
-
-		  cout << "8 " << (omp_get_thread_num()+2) << endl;
-			// srand48_r(seed, drand_Buffor);
-			srand48_r(seed, &buff);
-		  cout << "9 "  << endl;
-		}
-	};
 	int seed = (unsigned)(random() * (omp_get_thread_num()+2));
-	plantSeed ps(seed, *myBuffor);
+	srand48_r(seed, &drand_Buffor);
 #pragma omp for private(ps)
 	for (int i = 0; i < drawsNumber; i++) {
     cout << "11 "  << endl;
-		double result;
+		double result = 0;
 		// drand48_r(drand_Buffor, &result);
-		drand48_r(myBuffor, &result);
+		drand48_r(&drand_Buffor, &result);
     cout << "12 "  << endl;
 		ball = 1 + (int) (((double) balls * result) / ( RAND_MAX + 1.0)); // rand losuje od 0 do RAND_MAX wlacznie
     cout << "13 "  << endl;
