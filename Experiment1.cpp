@@ -107,14 +107,17 @@ long Experiment::singleExperimentResult() {
 Result * Experiment::calc(long experiments) {
 
 #pragma omp parallel
+{
  // for shared(experiments, histogram) private(l)\
 				// reduction(+ : histogram)
+#pragma omp parallel for
 	for (long l = 0; l < experiments; l++) {
 		// i = singleExperimentResult() i pragma omp atomic zeby zabezpieczyc histogram
 		int i = singleExperimentResult();
 #pragma omp atomic
 		histogram[i]++;
 	}
+}
 
 	long maxID = 0;
 	long minID = 0;
@@ -124,8 +127,10 @@ Result * Experiment::calc(long experiments) {
 	long values = 0;
 
 #pragma omp parallel
+{
 // for shared(maxN, maxID, hmin, hmax, histogram, sum) private(idx)\
 				// reduction(+ : sum, values)
+#pragma omp parallel for
 	for (long idx = hmin; idx <= hmax; idx++) {
 		if (maxN < histogram[idx]) {
 			maxN = histogram[idx];
@@ -137,6 +142,7 @@ Result * Experiment::calc(long experiments) {
 #pragma omp atomic
 		values += histogram[idx];
 	}
+}
 
 // indeks to wartosc, histogram -> liczba wystapien
 	return new Result(maxID, maxN, sum / values, values);
