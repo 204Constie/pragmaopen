@@ -14,6 +14,9 @@ class Experiment {
 private:
 	long *histogram; // histogram
 	bool *used; // wektor pomocniczy przy losowaniu bez zwracania
+
+	bool *usedPerThread;
+
 	int drawsNumber; // liczba kulek
 	int balls; // liczba kulek
 	long hmax; // maksymalny indeks histogramu
