@@ -64,7 +64,7 @@ long Experiment::singleExperimentResult() {
   cout << "6 "  << endl;
 	struct drand48_data drand_Buffor;
 	static drand48_data *myBuffor;
-#pragma omp threadprivate(myBuffor);
+#pragma omp threadprivate(myBuffor)
 
   cout << "7 "  << endl;
 	struct plantSeed{
