@@ -72,13 +72,13 @@ long Experiment::singleExperimentResult() {
 	// int seed = (unsigned)(random() * (omp_get_thread_num()+2));
 
 	struct plantSeed{
-		plantSeed(){
+		plantSeed(bool b){
 			int seed = (unsigned)(random() * (omp_get_thread_num()+2));
 			srand48_r(seed, &drand_Buffor);
 		}
 
 	}
-	plantSeed ps;
+	plantSeed ps(true);
 
 
   cout << "7 "  << endl;
