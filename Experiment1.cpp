@@ -75,7 +75,7 @@ long Experiment::singleExperimentResult() {
 			srand48_r(seed, myBuffor);
 		  cout << "9 "  << endl;
 		}
-	}
+	};
 	int seed = (unsigned)(random() * (omp_get_thread_num()+2));
 	plantSeed ps(seed, myBuffor);
 #pragma omp for private(ps)
