@@ -70,7 +70,7 @@ long Experiment::singleExperimentResult() {
 
   cout << "7 "  << endl;
 	struct plantSeed{
-		plantSeed(int seed, drand48_data *buff){
+		plantSeed(int seed, drand48_data &buff){
 
 		  cout << "8 " << (omp_get_thread_num()+2) << endl;
 			// srand48_r(seed, drand_Buffor);
