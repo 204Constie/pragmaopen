@@ -68,7 +68,7 @@ long Experiment::singleExperimentResult() {
 // }
 #pragma omp critical
 {
-	int seed = (unsigned)(random() * (omp_get_num_threads()+2));
+	int seed = (unsigned)(random() * (omp_get_thread_num()+2));
 	srand48_r(seed, drand_Buffor);
 }
 
@@ -76,7 +76,7 @@ long Experiment::singleExperimentResult() {
 	for (int i = 0; i < drawsNumber; i++) {
 // #pragma omp critical
 		double result;
-		int drand48_r(drand_Buffor, &result);
+		drand48_r(drand_Buffor, &result);
 		ball = 1 + (int) (((double) balls * result) / ( RAND_MAX + 1.0)); // rand losuje od 0 do RAND_MAX wlacznie
 
 		if (used[ball - 1])
