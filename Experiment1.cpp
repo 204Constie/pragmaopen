@@ -77,7 +77,7 @@ long Experiment::singleExperimentResult() {
 		}
 	}
 
-	plantSeed ps();
+	plantSeed ps;
 #pragma omp for private(ps)
 	for (int i = 0; i < drawsNumber; i++) {
     cout << "11 "  << endl;
