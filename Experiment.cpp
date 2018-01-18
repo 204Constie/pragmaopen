@@ -76,7 +76,7 @@ long Experiment::singleExperimentResult() {
 	for (int i = 0; i < drawsNumber; i++) {
 // #pragma omp critical
 		double result;
-		int drand48_r(*drand_Buffor, &result);
+		int drand48_r(drand_Buffor, &result);
 		ball = 1 + (int) (((double) balls * result) / ( RAND_MAX + 1.0)); // rand losuje od 0 do RAND_MAX wlacznie
 
 		if (used[ball - 1])
