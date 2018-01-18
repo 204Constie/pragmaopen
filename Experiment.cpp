@@ -64,12 +64,12 @@ long Experiment::singleExperimentResult() {
 
 // #pragma omp single
 // {
-	struct drand48_data drand_Buffor;
+	struct drand48_data *drand_Buffor;
 // }
 #pragma omp critical
 {
 	int seed = (unsigned)(random() * (omp_get_num_threads()+2));
-	srand48_r(seed, *drand_Buffor);
+	srand48_r(seed, drand_Buffor);
 }
 
 #pragma omp for
