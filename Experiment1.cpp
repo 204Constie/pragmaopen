@@ -74,7 +74,7 @@ long Experiment::singleExperimentResult() {
 
 		  cout << "8 " << (omp_get_thread_num()+2) << endl;
 			// srand48_r(seed, drand_Buffor);
-			srand48_r(seed, *buff);
+			srand48_r(seed, &buff);
 		  cout << "9 "  << endl;
 		}
 	};
