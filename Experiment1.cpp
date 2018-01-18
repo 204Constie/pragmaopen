@@ -74,12 +74,12 @@ long Experiment::singleExperimentResult() {
 
 		  cout << "8 " << (omp_get_thread_num()+2) << endl;
 			// srand48_r(seed, drand_Buffor);
-			srand48_r(seed, &buff);
+			srand48_r(seed, buff);
 		  cout << "9 "  << endl;
 		}
 	};
 	int seed = (unsigned)(random() * (omp_get_thread_num()+2));
-	plantSeed ps(seed, myBuffor);
+	plantSeed ps(seed, *myBuffor);
 #pragma omp for private(ps)
 	for (int i = 0; i < drawsNumber; i++) {
     cout << "11 "  << endl;
