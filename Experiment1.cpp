@@ -72,7 +72,7 @@ long Experiment::singleExperimentResult() {
 			int seed = (unsigned)(random() * (omp_get_thread_num()+2));
 		  cout << "8 "  << endl;
 			// srand48_r(seed, drand_Buffor);
-			srand48_r(seed, &myBuffor);
+			srand48_r(seed, myBuffor);
 		  cout << "9 "  << endl;
 		}
 	}
@@ -83,7 +83,7 @@ long Experiment::singleExperimentResult() {
     cout << "11 "  << endl;
 		double result;
 		// drand48_r(drand_Buffor, &result);
-		drand48_r(&myBuffor, &result);
+		drand48_r(myBuffor, &result);
     cout << "12 "  << endl;
 		ball = 1 + (int) (((double) balls * result) / ( RAND_MAX + 1.0)); // rand losuje od 0 do RAND_MAX wlacznie
     cout << "13 "  << endl;
