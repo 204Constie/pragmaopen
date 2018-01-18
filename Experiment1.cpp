@@ -73,6 +73,7 @@ long Experiment::singleExperimentResult() {
 // #pragma omp single
 // {
 	struct drand48_data *drand_Buffor;
+  cout << "7 "  << endl;
 // }
 // #pragma omp parallel
 // {
