@@ -80,7 +80,9 @@ long Experiment::singleExperimentResult() {
 // #pragma omp critical
 // {
 	int seed = (unsigned)(random() * (omp_get_thread_num()+2));
+  cout << "8 "  << endl;
 	srand48_r(seed, drand_Buffor);
+  cout << "9 "  << endl;
 // }
 // }
 
