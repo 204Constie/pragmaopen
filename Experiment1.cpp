@@ -78,7 +78,7 @@ long Experiment::singleExperimentResult() {
 		}
 
 	}
-	plantSeed ps();
+	plantSeed ps;
 
 
   cout << "7 "  << endl;
